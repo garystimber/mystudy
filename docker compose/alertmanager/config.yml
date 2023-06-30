@@ -1,0 +1,22 @@
+global:
+  resolve_timeout: 5m
+route:
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 1m
+  repeat_interval: 5m
+  receiver: 
+    - default-receiver
+
+receievers:
+  - name: 'telegram'
+    telegram_configs:
+      - bot_token: "6000075954:AAH8S5HDLr4U33HGxz6CwPGAuSq9ADiPPS0"
+        chat_id: -1001900751911
+        message: ' {{ template "telegram.text"  . }}'
+        api_url: "https://api.telegram.org"
+        send_resolved: true
+
+
+templates:
+  - "telegram.tmpl"
